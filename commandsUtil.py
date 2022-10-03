@@ -1,3 +1,14 @@
+import random # Used for humanization
+def randomOffset(max=100):
+    return random.randrange(-max,max)
+
+def randomRange(min=0,max=100):
+    return random.randrange(min,max)
+
+def randomSeconds(minMs=0,maxMs=100):
+    # Takes in MS values and returns a random time in seconds. Used for timers.
+    return random.randrange(minMs,maxMs)*0.01
+
 def safeInt(str):
     # Sometimes string do not convert to ints correctly
     # This gives a user-friendly error message when this happens

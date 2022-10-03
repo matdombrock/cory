@@ -28,7 +28,37 @@ def goto(arg):
     print('GOTO '+arg)
     commandsUtil.requireArg(arg)
     x, y = commandsUtil.getXY(arg)
-    pyautogui.moveTo(x, y, 0.2)
+    # Create and initial mouse movement to emulate someone grabbing the mouse
+    startingOffsetX = commandsUtil.randomOffset(100)
+    startingOffsetY = commandsUtil.randomOffset(100)
+    moveTime = commandsUtil.randomSeconds(25,100)
+    pyautogui.move(startingOffsetX,startingOffsetY, moveTime)
+    # Move the mouse in randomized chunks towards the target
+    chunks = 3
+    for chunk in range(chunks):
+        # Get the current mouse position
+        curX, curY = pyautogui.position()
+        # Calculate the difference between the current location and the destination
+        diffX = x - curX
+        diffY = y - curY
+        if diffX == 0 and diffY == 0:
+            # We reached the target
+            return 1
+        # Get our current chunk number
+        # Used to divide the difference into our next target
+        chunkNum = chunks - chunk
+        # Build our random offset
+        offsetX = 0
+        offsetY = 0
+        if(chunk < chunks-1):# Dont randomize the last chunk
+            offsetX = commandsUtil.randomOffset(300)
+            offsetY = commandsUtil.randomOffset(300)
+        # Generate the next target
+        targetX = (diffX/chunkNum)+offsetX
+        targetY = (diffY/chunkNum)+offsetY
+        # Move to the next target over a random amount ms between 250 and 1000
+        moveTime = commandsUtil.randomSeconds(25,100)
+        pyautogui.move(targetX,targetY, moveTime)
     return 1
 
 def click(arg):
