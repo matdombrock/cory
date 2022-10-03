@@ -61,7 +61,7 @@ WAIT 2
 CLICK 
 ```
 
-This script will show and alert box with the text "Running a new script!". Once the user clicks "OK" the mouse will be moved to 100, 100. Then the script will wait for 2 seconds and send a mouse click to the current mouse location.
+This script will show an alert box with the text "Running a new script!". Once the user clicks "OK" the mouse will be moved to 100, 100. Then the script will wait for 2 seconds and send a mouse click to the current mouse location.
 
 Cory features basic runtime error handling for CoryScript. If your script contains a syntax error, the script will run up until that point and then quit with an error message shown in your command line output. 
 
