@@ -65,6 +65,13 @@ This script will show an alert box with the text "Running a new script!". Once t
 
 Cory features basic runtime error handling for CoryScript. If your script contains a syntax error, the script will run up until that point and then quit with an error message shown in your command line output. 
 
+CoryScript also supports comments. These follow python `#` syntax. 
+
+```
+# This is a comment
+GOTO 100,100
+```
+
 # Cory Utility (Script Helper Tool)
 When writing CoryScripts, you will often need to know your current screen resolution and mouse position.
 
