@@ -255,7 +255,7 @@ Using the commands `listing` dictionary created in `/commands.py`, Cory checks t
 
 If it does it will execute that command (usually a wrapper for some PyAutoGUI calls) and move on to the next line. 
 
-The logic for reading and parsing the scripts is in `/cory.py`. The logic for each available command (as well as the definition of the commands listing dictionary) is in `commands.py`. 
+The logic for reading and parsing the scripts is in `/cory.py`. The logic for each available command (as well as the definition of the commands listing dictionary) is in `/commands.py`. 
 
 -------
 
