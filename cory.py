@@ -25,9 +25,9 @@ def executeScript():
         split = line.split(' ')
         # Get the command
         cmd = split[0]
-        if cmd == "#":
+        if line[0]=="#":
             # This line is a comment
-            continue
+            continue # Move to the next line of the script
         # Make sure the command is in uppercase
         cmd = cmd.upper()
         # Only some commands take an argument
