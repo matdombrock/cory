@@ -11,10 +11,14 @@ def randomSeconds(minMs=0,maxMs=1000):
     # Takes in MS values and returns a random time in seconds. Used for timers.
     return random.randrange(minMs,maxMs)*0.001
 
-def waitRandomSmall():
+def isHuman(state):
+    return state["human"]
+
+def waitIfHuman(state):
     # Waits a small amount of random time
-    seconds = random.randrange(15,50)*0.001
-    time.sleep(seconds)
+    if state["human"]:
+        seconds = random.randrange(15,50)*0.001
+        time.sleep(seconds)
 
 def safeInt(str):
     # Sometimes string do not convert to ints correctly
