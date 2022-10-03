@@ -6,6 +6,7 @@ import commands
 state = {
     "scriptLocation": "SCRIPT.txt",
     "script":"",
+    "human":False,
     "curLine":0
 }
 
