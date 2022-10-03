@@ -57,7 +57,7 @@ def goto(arg):
         targetX = (diffX/chunkNum)+offsetX
         targetY = (diffY/chunkNum)+offsetY
         # Move to the next target over a random amount ms between 250 and 1000
-        moveTime = commandsUtil.randomSeconds(25,100)
+        moveTime = commandsUtil.randomSeconds(250,1000)
         pyautogui.move(targetX,targetY, moveTime)
     return 1
 
@@ -68,6 +68,7 @@ def click(arg):
     arg = commandsUtil.defaultArg(arg, 1)
     arg = commandsUtil.safeInt(arg)
     for i in range(arg):
+        commandsUtil.waitRandomSmall()
         pyautogui.click() 
     return 1
 
@@ -76,6 +77,7 @@ def wait(arg):
     print('WAIT '+arg)
     arg = commandsUtil.defaultArg(arg, 1)
     arg = commandsUtil.safeInt(arg)
+    arg = arg + commandsUtil.randomSeconds(500,1000)
     time.sleep(arg)
     return 1
 
@@ -84,7 +86,10 @@ def write(arg):
     # Can not handle new lines
     print('WRITE '+arg)
     commandsUtil.requireArg(arg)
-    pyautogui.write(arg, interval=0.05)
+    argSplit = [*arg] #Split the string into an array of single chars
+    for char in argSplit:
+        commandsUtil.waitRandomSmall()
+        pyautogui.write(char)
     return 1
 
 def hotkey(arg):
@@ -94,6 +99,7 @@ def hotkey(arg):
     key1, key2 = _getAB(arg)
     commandsUtil.verifyKey(key1)
     commandsUtil.verifyKey(key2)
+    commandsUtil.waitRandomSmall()
     pyautogui.hotkey(key1, key2)
     return 1
 
@@ -102,16 +108,19 @@ def newLine(arg):
     arg = commandsUtil.defaultArg(arg, 1)
     arg = commandsUtil.safeInt(arg)
     for i in range(arg):
+        commandsUtil.waitRandomSmall()
         pyautogui.hotkey('shift', 'enter')
     return 1
 
 def selectAll(arg):
     print('SELECTALL '+arg)
+    commandsUtil.waitRandomSmall()
     pyautogui.hotkey('ctrl', 'a')
     return 1
 
 def fullScreen(arg):
     print('FULLSCREEN '+arg)
+    commandsUtil.waitRandomSmall()
     pyautogui.press('f11')
     return 1
 
@@ -163,6 +172,7 @@ def press(arg):
     commandsUtil.requireArg(arg)
     arg = arg.lower() # All key names are lowercase
     commandsUtil.verifyKey(arg)
+    commandsUtil.waitRandomSmall()
     pyautogui.press(arg)
     return 1
 

@@ -1,0 +1,5 @@
+# Assumes we have a text editor at 500,500
+GOTO 500,500
+CLICK
+SELECTALL
+WRITE This is a test
