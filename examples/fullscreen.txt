@@ -1,0 +1,4 @@
+ALERT This will put the currently selected window into full screen mode!
+FULLSCREEN
+ALERT Now we will exit full screen mode!
+FULLSCREEN

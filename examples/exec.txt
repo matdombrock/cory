@@ -1,0 +1,2 @@
+EXECUTESUB notepad.exe
+WRITE This is a test!
