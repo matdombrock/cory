@@ -5,7 +5,8 @@ import commands
 
 state = {
     "scriptLocation": "SCRIPT.txt",
-    "script":""
+    "script":"",
+    "curLine":0
 }
 
 def readScript():
@@ -16,8 +17,12 @@ def readScript():
 def executeScript():
     # Split the script into lines
     lines = state["script"].split('\n')
+    if(state["human"]):
+        print('Running in Human mode!')
     # Go through each line of the script
     for line in lines:
+        state['curLine'] = state['curLine']+1
+        print(str(state['curLine'])+': '+line)
         # We need to extract the command and the arg from the line
         cmd = 'NA' # Placeholder value
         arg = 'NA' # Placeholder value
@@ -41,13 +46,13 @@ def executeScript():
             if availableCmd == cmd:
                 foundCmd = True
         if foundCmd:
-            res = commands.listing[cmd](arg)
+            res = commands.listing[cmd](arg, state)
             if(res != True):
-                print('ERROR: THERE WAS A PROBLEM WITH  YOUR LAST '+cmd+' COMMAND')
-                print('READ: '+cmd+' '+arg)
+                print('ERROR: THERE WAS A PROBLEM WITH  YOUR LAST '+cmd+' COMMAND AT LINE '+str(state['curLine']))
+                print('READ: '+line)
                 return
         else:
-            print('ERROR: UNKNOWN COMMAND '+cmd)
+            print('ERROR: UNKNOWN COMMAND '+cmd+'AT LINE '+str(state['curLine']))
             return
     print('SCRIPT COMPLETE!')
 
