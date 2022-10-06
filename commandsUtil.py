@@ -1,3 +1,26 @@
+import random # Used for humanization
+import time # Used for waiting
+import pyautogui
+
+def randomOffset(max=100):
+    return random.randrange(-max,max)
+
+def randomRange(min=0,max=100):
+    return random.randrange(min,max)
+
+def randomSeconds(minMs=0,maxMs=1000):
+    # Takes in MS values and returns a random time in seconds. Used for timers.
+    return random.randrange(minMs,maxMs)*0.001
+
+def isHuman(state):
+    return state["human"]
+
+def waitIfHuman(state):
+    # Waits a small amount of random time
+    if state["human"]:
+        seconds = random.randrange(15,50)*0.001
+        time.sleep(seconds)
+
 def safeInt(str):
     # Sometimes string do not convert to ints correctly
     # This gives a user-friendly error message when this happens
@@ -6,6 +29,17 @@ def safeInt(str):
         return res
     except:
         print('Cannot convert: '+str+' to int!')
+        quit()
+        return False
+
+def safeFloat(str):
+    # Sometimes string do not convert to floats correctly
+    # This gives a user-friendly error message when this happens
+    try:
+        res = float(str)
+        return res
+    except:
+        print('Cannot convert: '+str+' to float!')
         quit()
         return False
 

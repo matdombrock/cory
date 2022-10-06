@@ -134,7 +134,14 @@ Y = Y Position
 .
 .
 ```
+## SCROLL
+```
+SCROLL
+SCROLL <N=1>
+```
+Scrolls the active window up or down by N scroll "clicks". This behavior will vary on each OS. A negative value scrolls down and positive scrolls up. 
 
+N = Amount of scroll "clicks". (Default = 1)
 ## CLICK
 ```
 CLICK

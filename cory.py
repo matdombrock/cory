@@ -58,8 +58,11 @@ def executeScript():
     print('SCRIPT COMPLETE!')
 
 def setup():
-    if(len(sys.argv) > 1):
+    if len(sys.argv) > 1 :
         state["scriptLocation"] = sys.argv[1]
+    if len(sys.argv) > 2 :
+        if sys.argv[2].lower() == 'human':
+            state["human"] = True
     readScript()
     executeScript()
 setup()
