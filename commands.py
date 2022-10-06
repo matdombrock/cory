@@ -62,6 +62,19 @@ def goto(arg, state):
         pyautogui.moveTo(x, y, 0.2)
     return 1
 
+def scroll(arg, state):
+    # Scrolls the given amount of pixels
+    commandsUtil.defaultArg(arg, 1)
+    arg = commandsUtil.safeInt(arg)
+    if commandsUtil.isHuman(state):
+        direction = 1 if arg > 0 else -1
+        count = round(arg / 10)
+        for i in range(count):
+            pyautogui.scroll(direction*10)
+        return 1
+    pyautogui.scroll(arg)
+    return 1
+
 def click(arg, state):
     # Send a click at the current mouse position
     # The value of arg determines the amount of clicks
@@ -75,7 +88,7 @@ def click(arg, state):
 def wait(arg, state):
     # Wait for the given amount of time in seconds
     arg = commandsUtil.defaultArg(arg, 1)
-    arg = commandsUtil.safeInt(arg)
+    arg = commandsUtil.safeFloat(arg)
     if(commandsUtil.isHuman(state)):
         arg = arg + commandsUtil.randomSeconds(500,1000)
     time.sleep(arg)
@@ -160,7 +173,7 @@ def press(arg, state):
     commandsUtil.requireArg(arg)
     arg = arg.lower() # All key names are lowercase
     commandsUtil.verifyKey(arg)
-    commandsUtil.waitRandomSmall()
+    commandsUtil.waitIfHuman(state)
     pyautogui.press(arg)
     return 1
 
@@ -170,6 +183,7 @@ def press(arg, state):
 listing = {
     "EXPECT": expect,
     "GOTO": goto,
+    "SCROLL": scroll,
     "CLICK": click,
     "WAIT": wait,
     "WRITE": write,

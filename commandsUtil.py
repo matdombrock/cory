@@ -1,5 +1,6 @@
 import random # Used for humanization
 import time # Used for waiting
+import pyautogui
 
 def randomOffset(max=100):
     return random.randrange(-max,max)
@@ -28,6 +29,17 @@ def safeInt(str):
         return res
     except:
         print('Cannot convert: '+str+' to int!')
+        quit()
+        return False
+
+def safeFloat(str):
+    # Sometimes string do not convert to floats correctly
+    # This gives a user-friendly error message when this happens
+    try:
+        res = float(str)
+        return res
+    except:
+        print('Cannot convert: '+str+' to float!')
         quit()
         return False
 
