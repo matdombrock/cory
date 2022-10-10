@@ -1,0 +1,7 @@
+LOOP A
+ALERT LOOP A
+LOOP B
+CONFIRM Should I exit loop B?
+LOOP B
+CONFIRM Should I keep looping?
+LOOP A

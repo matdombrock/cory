@@ -7,7 +7,8 @@ state = {
     "scriptLocation": "SCRIPT.txt",
     "script":"",
     "human":False,
-    "curLine":0
+    "curLine":0,
+    "loops": []
 }
 
 def readScript():
@@ -21,8 +22,8 @@ def executeScript():
     if(state["human"]):
         print('Running in Human mode!')
     # Go through each line of the script
-    for line in lines:
-        state['curLine'] = state['curLine']+1
+    while state['curLine'] < len(lines):
+        line = lines[state['curLine']]
         print(str(state['curLine'])+': '+line)
         # We need to extract the command and the arg from the line
         cmd = 'NA' # Placeholder value
@@ -41,6 +42,28 @@ def executeScript():
             # Get the arg
             arg = split[1:]
             arg = ' '.join(arg)
+        # Check if we have a loop command
+        if cmd == 'LOOP':
+            # Look for an existing loop
+            loopExists = False
+            for loop in state['loops']:
+                matchTag = loop['tag'] == arg
+                matchLine = loop['line'] != state['curLine']
+                if matchTag and matchLine: # found
+                    print('FOUND EXISTING LOOP: '+arg)
+                    state['curLine'] = loop['line']
+                    loopExists = True
+                    break
+            if loopExists: 
+                # We have set the line number to the desired loop point
+                continue # return to start of while loop
+            # Loop doest exist so append it
+            state['loops'].append({'tag':arg, 'line':state['curLine']})
+            print('CREATED NEW LOOP: '+arg)
+            # Move to next line
+            nextLine()
+            # Loop is a special command do not run it as a normal command
+            continue # return to start of while loop
         # Check that we have a valid command
         foundCmd = False
         for availableCmd in commands.listing:
@@ -51,11 +74,16 @@ def executeScript():
             if(res != True):
                 print('ERROR: THERE WAS A PROBLEM WITH  YOUR LAST '+cmd+' COMMAND AT LINE '+str(state['curLine']))
                 print('READ: '+line)
-                return
+                return # Quit
         else:
-            print('ERROR: UNKNOWN COMMAND '+cmd+'AT LINE '+str(state['curLine']))
-            return
+            print('ERROR: UNKNOWN COMMAND '+cmd+' AT LINE '+str(state['curLine']))
+            return # Quit
+        # Move to next line
+        nextLine()
     print('SCRIPT COMPLETE!')
+
+def nextLine():
+    state['curLine'] = state['curLine']+1
 
 def setup():
     if len(sys.argv) > 1 :
