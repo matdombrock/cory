@@ -1,6 +1,8 @@
 # Cory (Scriptable Python Based GUI Bot) 
 Cory is a python based interpreter for a very simple yet flexible GUI automation scripting language (CoryScript). 
 
+![cory](https://static1.personality-database.com/profile_images/55516dd0a3aa4ea198702184b28b22af.png)
+
 The CoryScript scripting language is very human readable and looks something like SQL. A command to move the mouse to a given position is like this:
 
 ```
