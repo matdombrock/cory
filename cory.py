@@ -81,7 +81,7 @@ def handleLoops(cmd, arg):
         # This was not a loop command
         return False
     argSplit = arg.split(' ')
-    loopTag = argSplit[0]
+    loopTag = argSplit[0].lower()
     loopCount = 0
     argHasCount = len(argSplit) > 1
     if argHasCount:
