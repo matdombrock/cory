@@ -4,9 +4,9 @@
 LOOP A
 CONFIRM This will loop forever. Press Cancel to exit.
 # Call the loop
-LOOP A
+LOOP A 3
 # Declare the loop
 LOOP B
 CONFIRM This will loop forever. Press Cancel to exit.
 # Call the loop
-LOOP B
+LOOP B 3
