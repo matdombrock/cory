@@ -1,1 +1,1 @@
-PYTHONFILE examples/pythonFile.py
+PYTHONFILE examples/external/pythonFile.py

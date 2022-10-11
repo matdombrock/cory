@@ -104,6 +104,16 @@ def write(arg, state):
         pyautogui.write(char)
     return 1
 
+def writeFile(arg, state):
+    try:
+        f = open(arg, "r")
+    except:
+        print('ERROR: CANT OPEN FILE: '+arg)
+        return 0
+    content = f.read()
+    write(content, state)
+    return 1
+
 def hotkey(arg, state):
     commandsUtil.requireArg(arg)
     arg = arg.lower() # All key names are lowercase
@@ -153,10 +163,15 @@ def python(arg, state):
     return 1
 
 def pythonFile(arg, state):
-    f = open(arg, "r")
+    try:
+        f = open(arg, "r")
+    except:
+        print('ERROR: CANT OPEN FILE: '+arg)
+        return 0
     content = f.read()
     exec(content)
     return 1
+
 
 def execute(arg, state):
     commandsUtil.requireArg(arg)
@@ -187,6 +202,7 @@ listing = {
     "CLICK": click,
     "WAIT": wait,
     "WRITE": write,
+    "WRITEFILE": writeFile,
     "HOTKEY": hotkey,
     "NEWLINE": newLine,
     "SELECTALL": selectAll,

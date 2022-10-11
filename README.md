@@ -98,6 +98,7 @@ CONFIRM <CONFIRM TEXT>
 DEBUG <DEBUG TEXT>
 PYTHON <SOME PYTHON>
 PYTHONFILE <SOMEFILE>
+LOOP <TAG>
 PRESS <KEY>
 ```
 
@@ -164,6 +165,12 @@ WRITE <SOME TEXT>
 WRITE Hello World
 ```
 Types out the given text. Make sure you have your text box selected with CLICK before typing
+## WRITEFILE
+```
+WRITEFILE <SOMEFILE>
+WRITEFILE some_text_file.txt
+```
+Reads a file and types out the given text. Make sure you have your text box selected with CLICK before typing
 ## HOTKEY
 ```
 HOTKEY <KEY1>,<KEY2>
@@ -222,6 +229,24 @@ PYTHON someFile.py
 Executes the given Python file.
 
 **NOTE: Use with caution!**
+## LOOP (DECLARE)
+```
+LOOP <TAG=Null>
+LOOP SomeTag
+```
+Sets up a loop with the given tag
+
+TAG = The name of the loop. Omit for simple looping.
+## LOOP (USE)
+```
+LOOP <TAG=Null> <ITERATIONS=Infinity>
+LOOP SomeTag 3
+```
+Runs up a loop with the given tag
+
+TAG = The name of the loop. Omit for simple looping.
+
+ITERATIONS = The amount of times to run the loop. Not possible with simple looping.
 ## PRESS
 ```
 PRESS <KEY>
@@ -258,6 +283,100 @@ This is a list of acceptable inputs for the HOTKEY and PRESS commands
 'shift', 'shiftleft', 'shiftright', 'sleep', 'space', 'stop', 'subtract', 'tab',
 'up', 'volumedown', 'volumemute', 'volumeup', 'win', 'winleft', 'winright', 'yen',
 'command', 'option', 'optionleft', 'optionright']
+```
+
+# Looping
+Looping is one of the more advanced features of Cory. The `LOOP` command lets you run the same chunk of the script multiple times. This can keep you from needing to type out the same series of commands over and over, and can be used to create an infinite automation loop. 
+
+## Simple Looping
+
+The simplest way to get started with using loops is to put just put one `LOOP` command where you want to start the loop, and another `LOOP` command where you want to end it:
+```
+ALERT We are going to enter a loop now!
+LOOP
+CONFIRM We are in the loop! Press "cancel" to exit.
+LOOP
+```
+
+This will show the confirmation bot over and over until you press "cancel".
+
+**NOTE: Simple looping will always run forever. To cancel your current script, press ctrl+c on the command line!**
+
+## Advanced Looping
+
+Advanced looping allows you to use multiple loops in the same script and set how many times you want each loop to run.
+
+To get started with more advanced loop usage, you first need to declare a "loop point". To declare a loop point, we use the `LOOP` command followed by a unique string (the "tag"). 
+
+```
+LOOP SomeLoopTag
+```
+
+You can think of a loop point as a kind of bookmark within your script. Once we have declared a loop point, we can make our script return to that point whenever we want.
+
+In the context of an actual script, it might look something like this:
+```
+ALERT Starting a loop demo
+LOOP SomeLoopTag
+CONFIRM We are in the loop! Press "cancel" to exit.
+```
+So now that we set up our loop point with the tag "SomeLoopTag" we can return to it:
+
+```
+ALERT Starting a loop demo
+LOOP SomeLoopTag
+CONFIRM We are in the loop! Press "cancel" to exit.
+# Return to the second line and keep going
+LOOP SomeLoopTag
+```
+
+If we run this script we will get an infinite series of confirmation windows. 
+
+Notice that the second time we used the `LOOP` command it looked exactly the same. Once a loop point has been declared, any subsequent uses of the `LOOP` command using this same tag will *call the loop* instead of declaring it. By default, calling a loop command without a number after it will run the loop forever. If we want to run it some specific amount of times instead, we can do that like this:
+
+```
+ALERT Starting a loop demo
+LOOP SomeLoopTag
+CONFIRM We are in the loop! Press "cancel" to exit.
+# Return to the second line and keep going
+LOOP SomeLoopTag 123
+```
+
+The above script will run the loop 123 times. 
+
+Since each loop point has a unique tag assigned, we can have as many loop points as we want:
+
+```
+ALERT Starting a loop demo
+LOOP SomeLoopTag
+CONFIRM We are in the first loop! Press "cancel" to exit.
+# Return to the second line and keep going
+LOOP SomeLoopTag 3
+LOOP SomeOtherLoopTag
+CONFIRM We are in the second loop! Press "cancel" to exit.
+# Return to the second line and keep going
+LOOP SomeOtherLoopTag 3
+```
+
+**NOTE: Make sure you give your first loop an iteration count (number) or you will never reach the second loop!**
+
+## Super Advanced Looping
+
+You can even nest loops within one another:
+```
+# Declare the loop
+LOOP Main
+CONFIRM This is the main loop. Press Cancel to exit.
+LOOP Sub
+CONFIRM This is a sub loop. Press Cancel to exit.
+# Call the sub-loop
+LOOP Sub 3
+LOOP Sub2
+CONFIRM This is the second sub loop. Press Cancel to exit.
+# Call the second sub-loop
+LOOP Sub2 3
+# Call the loop
+LOOP Main 2
 ```
 
 # How Does It Work?
