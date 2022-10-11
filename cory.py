@@ -12,7 +12,11 @@ state = {
 }
 
 def readScript():
-    f = open(state["scriptLocation"], "r")
+    try:
+        f = open(state['scriptLocation'], "r")
+    except:
+        print('ERROR: CANT OPEN SCRIPT: '+state['scriptLocation'])
+        quit()
     content = f.read()
     state["script"] = content
 
