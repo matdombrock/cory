@@ -37,6 +37,15 @@ For instance, to run the alert example do:
 python cory.py examples/alert.txt
 ```
 
+# Human Mode
+Cory comes with "free humanization". All you need to do to enable it is type `human` at the end of your launch command. 
+
+```
+python cory.py someScript.txt human
+```
+
+When the `human` flag is added, Cory will automatically do it's best to act like a human. This means adding a little bit or randomization and delay here and there. This won't be enough to trick other actual humans, but it should be enough to get around basic anti-bot detection tools. Essentially it makes it less obvious that Cory is a bot at the expense of your scripts running a little slower. 
+
 # CoryScript Syntax
 CoryScript has a very simple syntax. Each line of a script file must contain exactly one command. 
 
