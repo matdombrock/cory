@@ -1,6 +1,8 @@
 # Cory (Scriptable Python Based GUI Bot) 
 Cory is a python based interpreter for a very simple yet flexible GUI automation scripting language (CoryScript). 
 
+![cory](https://static1.personality-database.com/profile_images/55516dd0a3aa4ea198702184b28b22af.png)
+
 The CoryScript scripting language is very human readable and looks something like SQL. A command to move the mouse to a given position is like this:
 
 ```
@@ -34,6 +36,15 @@ For instance, to run the alert example do:
 ```
 python cory.py examples/alert.txt
 ```
+
+# Human Mode
+Cory comes with "free humanization". All you need to do to enable it is type `human` at the end of your launch command. 
+
+```
+python cory.py someScript.txt human
+```
+
+When the `human` flag is added, Cory will automatically do it's best to act like a human. This means adding a little bit or randomization and delay here and there. This won't be enough to trick other actual humans, but it should be enough to get around basic anti-bot detection tools. Essentially it makes it less obvious that Cory is a bot at the expense of your scripts running a little slower. 
 
 # CoryScript Syntax
 CoryScript has a very simple syntax. Each line of a script file must contain exactly one command. 
