@@ -217,6 +217,13 @@ ALERT <Some Alert Message>
 Shows an alert message popup window on the screen with the given text. 
 
 Waits for the user to press "OK" before the script continues.
+## CONFIRM
+```
+CONFIRM <Some Confirm Message>
+```
+Shows an confirm message popup window on the screen with the given text. 
+
+If the user presses "OK" the script will continue. If they press "Cancel" the script will exit. 
 ## DEBUG
 ```
 DEBUG <Some DEBUG Message>
